@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dictionary Application</title>
+    <link href="https://fonts.googleapis.com/css2?family=Piedra&display=swap" rel="stylesheet"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"></head>
+<style>
+
+body{
+    /* background:  rgba(40, 40, 40, .8); */
+    background-image: url('./220680.jpg');
+    color: #fff;
+}
+.container{
+        background:  rgba(40, 40, 40, .8);
+        height: 100vh;
+        padding: 20px 40px 20px 40px;
+
+
+}
+
+.logo,.app{
+    font-family: 'Piedra', cursive;
+    font-size: 100px;
+}
+.row{
+    text-align: center;
+}
+.ouput{
+    border: solid white;
+}
+.input{
+    background: yellow !important;
+color: black !important;
+font-size: 50px !important;
+text-align: center !important;
+
+}
+.input::placeholder { 
+  color: red;
+  opacity: .6; 
+  font-size: 40px;
+}
+
+
+
+</style>
+<body>
+    <div class="container ">
+        <div class="row ouput d-flex">
+            <div class="col s12 m6 l4 flex-fill bd-highlight">
+           
+                <div class="card grey darken-3">
+                  <div class="card-content white-text">
+                    <span class="card-title" ></span>
+                    <span  class="Value"></span>
+                  </div>
+                 
+                </div>
+              </div>
+        </div>
+        <div class="row d-flex m-20 ">
+            <div class="col s12 m6 l4 flex-fill bd-highlight text-center">
+           
+               <h1 class="logo">Dev Ngecu</h1>
+               <h1 class="yellow-text text-accent-2 app">
+                Dictionary Web Application
+               </h1>
+               <h3 class="sinput">
+                   SEARCH
+               </h3>
+              
+               
+               
+              </div>
+        </div>
+        <div class="row d-flex ">
+            <div class="col s12 m6 l4 flex-fill bd-highlight text-center">
+                <input type="text" class="input" placeholder="Input Word">
+                <button type="button" class="btn btn-primary btn-large search p2 m2" >SEARCH</button>
+            </div>
+        </div>
+        <div class="row d-flex text-center">
+                Dev Ngecu @ 2020
+        </div>
+        
+        </div>
+
+</body>
+<script>
+   
+    var card_title = document.querySelector('.card-title');
+    var result = document.querySelector('.Value');
+    
+
+    const change = () => {
+        var input = document.querySelector('.input').value;
+
+        fetch("data.json")
+        .then(response => response.json())
+        .then(json => {
+            var definition = json[input]
+                
+                if (input) {
+                    if (input in json ) {
+                    result.innerHTML = "Found &#10004; ";
+                    card_title.innerHTML = definition + ` &#128513;`;
+                    
+                }
+                else{
+                    result.innerHTML = "";
+                    card_title.innerHTML = `NO SUCH WORD &#128530;`;
+                    
+                }
+                }
+                else{
+                    result.innerHTML = "NO INPUT ";
+        
+                    card_title.innerHTML = `&#128530;`;
+                }
+                
+                
+    })};
+
+    document.querySelector('.search').addEventListener('click', change);
+    
+  
+ 
+    
+</script>
+
+</html>
